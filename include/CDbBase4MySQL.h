@@ -181,7 +181,7 @@ namespace nsDb4MySQL
          * \param 与SelectLeftJoinQuery参数一致
          * \return 左连接查询操作字符串
          */
-        static QString SelectJoinQuery2String(const QString& sFields, const QString& sTableName, const QString &sJointType,
+        static QString SelectJoinQuery2String(const QString& sJointType, const QString &sFields, const QString &sTableName,
                                               const QString& sJoinTableName, const QString &sEqualFields, const QString &sJoinEqualFields,
                                               const QString& sWhereCondition = QString(), const QString& sGroupCondition = QString(),
                                               const QString& sOrderCondition = QString(),

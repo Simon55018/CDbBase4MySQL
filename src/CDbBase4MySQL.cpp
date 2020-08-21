@@ -293,7 +293,7 @@ namespace nsDb4MySQL
         return sQuery;
     }
 
-    bool CDbBase4MySQL::SelectJoinQuery(QSqlQuery &query, const QString &sFields, const QString &sTableName, const QString &sJointType,
+    bool CDbBase4MySQL::SelectJoinQuery(QSqlQuery &query, const QString &sJointType, const QString &sFields, const QString &sTableName,
                                         const QString &sJoinTableName, const QString &sEqualFields, const QString &sJoinEqualFields,
                                         const QString &sWhereCondition, const QString &sGroupCondition,
                                         const QString &sOrderCondition, int nLimNum, int nOffNum)
@@ -313,7 +313,7 @@ namespace nsDb4MySQL
         }
         else
         {
-            sQuery = QString("select %1 from %2 %3 join %4 on %2.%5=%3.%6").arg(sFields).arg(sTableName)
+            sQuery = QString("select %1 from %2 %3 join %4 on %2.%5=%4.%6").arg(sFields).arg(sTableName)
                             .arg(sJointType).arg(sJoinTableName).arg(sEqualFields).arg(sJoinEqualFields);
         }
 
@@ -338,7 +338,7 @@ namespace nsDb4MySQL
         return bRet;
     }
 
-    QString CDbBase4MySQL::SelectJoinQuery2String(const QString &sFields, const QString &sTableName, const QString &sJointType,
+    QString CDbBase4MySQL::SelectJoinQuery2String(const QString &sJointType, const QString &sFields, const QString &sTableName,
                                                   const QString &sJoinTableName, const QString &sEqualFields, const QString &sJoinEqualFields,
                                                   const QString &sWhereCondition, const QString &sGroupCondition,
                                                   const QString &sOrderCondition, int nLimNum, int nOffNum)
@@ -357,7 +357,7 @@ namespace nsDb4MySQL
         }
         else
         {
-            sQuery = QString("select %1 from %2 %3 join %4 on %2.%5=%3.%6").arg(sFields).arg(sTableName)
+            sQuery = QString("select %1 from %2 %3 join %4 on %2.%5=%4.%6").arg(sFields).arg(sTableName)
                             .arg(sJointType).arg(sJoinTableName).arg(sEqualFields).arg(sJoinEqualFields);
         }
 
@@ -395,12 +395,12 @@ namespace nsDb4MySQL
         QString sQuery;
         if( !sWhereCondition.isEmpty() )
         {
-            sQuery = QString("%1 %2 %3 join (%4) %5 on %2.%6=%4.%7 where %8").arg(sSelectSQL).arg(sTableName).arg(sJointType)
+            sQuery = QString("%1 %2 %3 join (%4) %5 on %2.%6=%5.%7 where %8").arg(sSelectSQL).arg(sTableName).arg(sJointType)
                             .arg(sJoinSelectSQL).arg(sJoinTableName).arg(sEqualFields).arg(sJoinEqualFields).arg(sWhereCondition);
         }
         else
         {
-            sQuery = QString("%1 %2 %3 join (%4) %5 on %2.%6=%4.%7").arg(sSelectSQL).arg(sTableName).arg(sJointType)
+            sQuery = QString("%1 %2 %3 join (%4) %5 on %2.%6=%5.%7").arg(sSelectSQL).arg(sTableName).arg(sJointType)
                             .arg(sJoinSelectSQL).arg(sJoinTableName).arg(sEqualFields).arg(sJoinEqualFields);
         }
 
@@ -441,12 +441,12 @@ namespace nsDb4MySQL
         QString sQuery;
         if( !sWhereCondition.isEmpty() )
         {
-            sQuery = QString("%1 %2 %3 join (%4) %5 on %2.%6=%4.%7 where %8").arg(sSelectSQL).arg(sTableName).arg(sJointType)
+            sQuery = QString("%1 %2 %3 join (%4) %5 on %2.%6=%5.%7 where %8").arg(sSelectSQL).arg(sTableName).arg(sJointType)
                             .arg(sJoinSelectSQL).arg(sJoinTableName).arg(sEqualFields).arg(sJoinEqualFields).arg(sWhereCondition);
         }
         else
         {
-            sQuery = QString("%1 %2 %3 join (%4) %5 on %2.%6=%4.%7").arg(sSelectSQL).arg(sTableName).arg(sJointType)
+            sQuery = QString("%1 %2 %3 join (%4) %5 on %2.%6=%5.%7").arg(sSelectSQL).arg(sTableName).arg(sJointType)
                             .arg(sJoinSelectSQL).arg(sJoinTableName).arg(sEqualFields).arg(sJoinEqualFields);
         }
 
